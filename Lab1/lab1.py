@@ -43,6 +43,9 @@ print("Moby Dick es más diverso" if (moby_dick_type_token_ratio > wsj_type_toke
 # fuente de sintaxis del operador ternario: https://www.pythontutorial.net/python-basics/python-ternary-operator/
 # respuesta: el WSJ es más diverso
 
+# Punto 6
+# respuesta: probablemente la diferencia en diversidad se da por un mayor vocabulario técnico necesario para expresar ideas relacionadas con lo financiero, aumentando la cantidad de palabras distintas a usar.
+
 # Punto 7
 mle_whale_moby_dick = unigram_mle(moby_dick_tokens, "whale")
 print("El MLE de \"whale\" en Moby Dick es " + str(mle_whale_moby_dick))
