@@ -39,11 +39,13 @@ race_as_noun = ("race", "NN")
 race_as_verb = ("race", "VB")
 
 print("La longitud del corpus Brown es: " + str(len(brown.tagged_words())))
+# respuesta: 1161192
 
 times_race_is_noun = brown.tagged_words().count(race_as_noun)
 times_race_is_verb = brown.tagged_words().count(race_as_verb)
 
 print("Es más frecuente como verbo" if times_race_is_verb > times_race_is_noun else "Es más frecuente como sustantivo")
+# respuesta: es más frecuente como verbo
 
 # Punto 6
 
@@ -57,4 +59,6 @@ tag_according_to_unigram = pos_according_to_tagger(sentence, "race", unigram_tag
 tag_according_to_hmm = pos_according_to_tagger(sentence, "race", hmm_tagger)
 
 print("Según el tagger unigramo, la palabra \"race\" es: " + tag_according_to_unigram)
+# respuesta: NN
 print("Según el tagger HMM, la palabra \"race\" es: " + tag_according_to_hmm)
+# respuesta: VB (es la correcta en este contexto)
