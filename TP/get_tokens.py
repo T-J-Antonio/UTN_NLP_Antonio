@@ -1,6 +1,7 @@
 from stemmer import WrappedVectorizer
 from nltk import word_tokenize, re
 from textract import process
+from sentence_similarity import sentence_similarity
 
 # textract has problems interacting with cmd, use bash with -i flag
 def tokens_from_file(src):
@@ -15,9 +16,13 @@ def lower_and_filter(a_list):
 
 # Obtains a list of tokenized, stemmmed sentences, without stop words.
 def processed_sentences_from_file(src):
-    text = bytes.decode(process(src))
-    sentences = text.split(".")
+    sentences = sentences_from_file(src)
     vectorizer = WrappedVectorizer()
     analyze = vectorizer.build_analyzer()
     stemmed_sentences = list(map(lambda s: analyze(s), sentences))
     return stemmed_sentences
+
+# Obtains a list of sentences.
+def sentences_from_file(src):
+    text = bytes.decode(process(src))
+    return text.split(".")
