@@ -1,1 +1,0 @@
-En Haskell no hay loops. En su lugar, se usan definiciones recursivas. Hay recursividad si la función se invoca a sí misma en su definición.

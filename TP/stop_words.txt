@@ -6,10 +6,10 @@ unos
 uno
 sobre
 todo
-también
+tambien
 tras
 otro
-algún
+algun
 alguno
 alguna
 algunos
@@ -30,7 +30,7 @@ en
 para
 atras
 porque
-por qué
+por que
 estado
 estaba
 ante
@@ -58,7 +58,8 @@ hacen
 cada
 fin
 incluso
-primero	desde
+primero
+desde
 conseguir
 consigo
 consigue
@@ -117,7 +118,7 @@ entonces
 tiempo
 verdad
 verdadero
-verdadera	
+verdadera
 cierto
 ciertos
 cierta

@@ -5,8 +5,8 @@ from textract import process
 
 # Wraps SpanishStemmerCountVectorizer with the spanish stop words to provide a cleaner interface
 class WrappedVectorizer():
-    def count_vectorizer(_):
-        spanish_stop_words = word_tokenize(bytes.decode(process("stop_words.txt")))
+    def count_vectorizer(self):
+        spanish_stop_words = word_tokenize(process("stop_words.txt").decode("utf-8"))
         return SpanishStemmedCountVectorizer(stop_words = spanish_stop_words)
     def build_analyzer(self): 
         return self.count_vectorizer().build_analyzer()
@@ -18,4 +18,4 @@ class SpanishStemmedCountVectorizer(CountVectorizer):
         return lambda doc: list(map(lambda w: spanish_stemmer.stem(w), analyzer(doc)))
 
 class StemmerBuilder():
-    def build_spanish_stemmer(_): return SnowballStemmer("spanish")
+    def build_spanish_stemmer(self): return SnowballStemmer("spanish")
