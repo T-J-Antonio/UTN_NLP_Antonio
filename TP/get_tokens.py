@@ -4,7 +4,7 @@ from functools import reduce
 
 # textract has problems interacting with cmd, use bash with -i flag+
 
-# Obtains a list of tuples:
+# Returns a list of tuples:
 #   1st element: original sentence.
 #   2nd element: tokenized, stemmmed sentence, without stop words.
 def processed_sentences_from_file(src):
