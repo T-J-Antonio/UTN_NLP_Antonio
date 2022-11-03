@@ -1,18 +1,8 @@
 from stemmer import WrappedVectorizer
-from nltk import word_tokenize, re
 from textract import process
 from functools import reduce
 
-# textract has problems interacting with cmd, use bash with -i flag
-def tokens_from_file(src):
-    text = process(src).decode("utf-8")
-    tokens = lower_and_filter(word_tokenize(text))
-    return tokens
-
-def lower_and_filter(a_list):
-    list_lower = list(map(lambda w: w.lower(), a_list))
-    list_filtered = list(filter(lambda w: re.search("\w", w), list_lower))
-    return list_filtered
+# textract has problems interacting with cmd, use bash with -i flag+
 
 # Obtains a list of tuples:
 #   1st element: original sentence.

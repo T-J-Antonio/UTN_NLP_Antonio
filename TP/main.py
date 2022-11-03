@@ -1,20 +1,19 @@
+import sys
 from get_tokens import processed_sentences_from_file
-from sentence_similarity import sentence_similarity
 from get_files_from_dataset import get_files_from_dataset
+from text_similarity import text_similarity
 
+# PDF files cannot include special characters in their names
 file_list = get_files_from_dataset()
 
 text_list = list(map(processed_sentences_from_file, file_list))
 
-similar_sentences = []
+file = sys.argv[1]
+print(file)
+text_to_analyze = processed_sentences_from_file(file)
 
-for t in text_list[0]:
-    for t2 in text_list[1]:
-        similarity = sentence_similarity(t[1], t2[1])
-        if (similarity > 0.3):
-            similar_sentences.append((t[0], t2[0]))
-            print(t[1])
-            print(t2[1])
-
-for t in similar_sentences:
-    print(t[0] + "; " + t[1])
+for i in range(0, len(file_list)):
+    result = text_similarity(text_to_analyze, text_list[i])
+    if result > 0.3: 
+        print(file_list[i].replace("\u0301", "_"))
+        print(result)
