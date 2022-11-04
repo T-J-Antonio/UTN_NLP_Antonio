@@ -5,7 +5,7 @@ from functools import reduce
 
 def vocabulary(cursor):
     cursor.execute("SELECT word_proper FROM word")
-    vocabulary = list(map(lambda row: row.word_proper, cursor.fetchall()))
+    vocabulary = list(map(lambda row: (row.word_proper).rstrip(), cursor.fetchall()))
     return vocabulary
 
 def prior_probability(cursor, topic_id):
@@ -44,14 +44,10 @@ def topic_likelihood(cursor, topic_id, tokens):
 
     tokens_in_vocabulary = list(filter(lambda token: token in v, tokens))
 
-    # check vocabulary and token list, why is intersectino = emptyset?
-
     feature_likelihoods = list(map(lambda token: feature_likelihood(cursor, topic_id, token), tokens_in_vocabulary))
 
     log_feature_likelihoods = list(map(log, feature_likelihoods))
-
-    print(log(prior_p))
-
+    
     return log(prior_p) + sum(log_feature_likelihoods)
 
 def reduce1(function, a_list):
