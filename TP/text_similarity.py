@@ -8,8 +8,3 @@ def find_similarity(sentence, text):
 def similar_sentences(new_text, text_from_dataset):
     mapped = list(map(lambda sentence: find_similarity(sentence, text_from_dataset), new_text))
     return mapped
-
-def text_similarity(new_text, text_from_dataset):
-    coincidences = similar_sentences(new_text, text_from_dataset)
-    percentage = coincidences / len(new_text)
-    return percentage

@@ -2,7 +2,7 @@ from stemmer import WrappedVectorizer
 from textract import process
 from functools import reduce
 
-# textract has problems interacting with cmd, use bash with -i flag+
+# textract has trouble interacting with cmd, use bash with -i flag+
 
 # Returns a list of tuples:
 #   1st element: original sentence.

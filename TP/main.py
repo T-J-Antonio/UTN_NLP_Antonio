@@ -1,9 +1,7 @@
 import sys
 from get_tokens import processed_sentences_from_file
 from get_files_from_dataset import get_files_from_dataset
-from text_similarity import text_similarity, similar_sentences
-
-def fst(t): return t[0]
+from text_similarity import similar_sentences
 
 # PDF files cannot include special characters in their names
 file_list = get_files_from_dataset()
