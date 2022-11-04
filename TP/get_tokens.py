@@ -1,7 +1,6 @@
 from stemmer import WrappedVectorizer
 from textract import process
 from functools import reduce
-from nltk import word_tokenize, re
 
 # textract has trouble interacting with cmd, use bash with -i flag+
 

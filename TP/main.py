@@ -12,21 +12,21 @@ text_list = list(map(processed_sentences_from_file, file_list))
 file = sys.argv[1]
 
 topic = tag_topic(file)
+
+text_to_analyze = processed_sentences_from_file(file)
+
+plagiarism = list(map(lambda t: (t[0], []), text_to_analyze))
+
+for i in range(0, len(file_list)):
+    plagiarised_sentences = similar_sentences(text_to_analyze, text_list[i])
+    for j in range(0, len(text_to_analyze)):
+        if (plagiarised_sentences[j]): plagiarism[j][1].append(file_list[i])
+
+print("Nombre del archivo: " + file)
 print("Tópico del archivo: " + topic)
-
-# text_to_analyze = processed_sentences_from_file(file)
-
-# plagiarism = list(map(lambda t: (t[0], []), text_to_analyze))
-
-# for i in range(0, len(file_list)):
-#     plagiarised_sentences = similar_sentences(text_to_analyze, text_list[i])
-#     for j in range(0, len(text_to_analyze)):
-#         if (plagiarised_sentences[j]): plagiarism[j][1].append(file_list[i])
-
-# print("Nombre del archivo: " + file)
-# for s in plagiarism:
-#     print("Oración: " + s[0])
-#     if s[1] == []: print("No plagiada.")
-#     else:
-#         print("Posiblemente plagiada de las siguientes fuentes:")
-#         for ps in s[1]: print(ps.replace("\u0301", "_"))
+for s in plagiarism:
+    print("Oración: " + s[0])
+    if s[1] == []: print("No plagiada.")
+    else:
+        print("Posiblemente plagiada de las siguientes fuentes:")
+        for ps in s[1]: print(ps.replace("\u0301", "_"))

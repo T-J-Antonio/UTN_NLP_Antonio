@@ -47,7 +47,7 @@ def topic_likelihood(cursor, topic_id, tokens):
     feature_likelihoods = list(map(lambda token: feature_likelihood(cursor, topic_id, token), tokens_in_vocabulary))
 
     log_feature_likelihoods = list(map(log, feature_likelihoods))
-    
+
     return log(prior_p) + sum(log_feature_likelihoods)
 
 def reduce1(function, a_list):
