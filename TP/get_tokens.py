@@ -1,6 +1,7 @@
 from stemmer import WrappedVectorizer
 from textract import process
 from functools import reduce
+from nltk import word_tokenize, re
 
 # textract has trouble interacting with cmd, use bash with -i flag+
 
@@ -31,3 +32,10 @@ def split_by_punctuation_symbols(string):
     split_by_enter = concat(list(map(lambda s: s.split("\n"), split_by_question_marks)))
     split_by_tab = concat(list(map(lambda s: s.split("\t"), split_by_enter)))
     return split_by_tab
+
+def tokens_from_file(src):
+    text = process(src).decode("utf-8")
+    vectorizer = WrappedVectorizer()
+    analyze = vectorizer.build_analyzer()
+    tokens = analyze(text)
+    return tokens
