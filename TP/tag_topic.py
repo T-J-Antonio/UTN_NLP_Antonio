@@ -69,8 +69,6 @@ def tag_topic(src):
 
     likelihoods = list(map(lambda topic_id: (topic_id, topic_likelihood(cursor, topic_id, tokens)), topic_id_list))
 
-    for t in likelihoods: print(t)
-
     max_likelihood = max_by_snd(likelihoods)
 
     best_match_id = max_likelihood[0]
