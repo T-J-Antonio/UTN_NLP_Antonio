@@ -1,10 +1,7 @@
-from sentence_similarity import sentence_similarity
+from sklearn.metrics.pairwise import cosine_similarity
+from stemmer import WrappedVectorizer
 
-def find_similarity(sentence, text):
-    for sentence_from_text in text:
-        if sentence_similarity(sentence[1], sentence_from_text[1]) > 0.5: return True
-    return False
-
-def similar_sentences(new_text, text_from_dataset):
-    mapped = list(map(lambda sentence: find_similarity(sentence, text_from_dataset), new_text))
-    return mapped
+def text_similarity(text1, text2):
+    vectorizer = WrappedVectorizer()
+    sparse_matrix = vectorizer.fit_transform([text1, text2])
+    return cosine_similarity(sparse_matrix)[0][1]

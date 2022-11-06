@@ -10,6 +10,8 @@ class WrappedVectorizer():
         return SpanishStemmedCountVectorizer(stop_words = spanish_stop_words)
     def build_analyzer(self): 
         return self.count_vectorizer().build_analyzer()
+    def fit_transform(self, texts):
+        return self.count_vectorizer().fit_transform(texts)
 
 class SpanishStemmedCountVectorizer(CountVectorizer):
     def build_analyzer(self):
