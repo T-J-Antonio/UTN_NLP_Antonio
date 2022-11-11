@@ -21,5 +21,5 @@ for f in file_list:
 
 print("Nombre del archivo: " + file)
 print("Tópico del archivo: " + topic)
-for f in plagiarism:
+for f in plagiarised_texts:
     print(f.replace("\u0301", "_"))
