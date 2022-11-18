@@ -1,25 +1,33 @@
-import nltk
+from nltk import pos_tag, word_tokenize
 from nltk.wsd import lesk
 from nltk.stem import WordNetLemmatizer
-from nltk.corpus import brown
 
-def pos_according_to_tagger(sentence, word, tagger):
-    tokens = word_tokenize(sentence)
-    tagged_tokens = tagger.tag(tokens)
-    # Se asume que la palabra aparece una vez en la oración
-    word_with_pos = list(filter(lambda t: t[0] == word, tagged_tokens))[0]
-    pos = word_with_pos[1]
-    return pos
+def getOrElse(x, y):
+    return x if x is not None else y
+
+def simplify_pos_tag(tag):
+    tags = {
+        "NOUN": "n",
+        "ADJ": "a",
+        "VERB": "v",
+        "ADV": "r"
+    }
+    return getOrElse(tags.get(tag), "n")
 
 def lesk_witk_lemmatizer(tokens, specific_token, specific_token_pos):
     wnLemmatizer = WordNetLemmatizer()
 
-    hmm_tagger = nltk.hmm.HiddenMarkovModelTrainer().train_supervised(brown.tagged_sents(categories="news")[:5000])
-    
-    # bring sentence or tokens?
-    tagged_tokens = list(map(pos_according_to_tagger()))
-    
-    lemmatized_tokens = list(map(lambda w: wnLemmatizer.lemmatize(w), tokens))
+    tagged_tokens = pos_tag(tokens, tagset = "universal")
+
+    basically_tagged_tokens = list(map(lambda t: (t[0], simplify_pos_tag(t[1])), tagged_tokens))
+
+    lemmatized_tokens = list(map(lambda t: wnLemmatizer.lemmatize(t[0], t[1]), basically_tagged_tokens))
 
     lemmatized_specific_token = wnLemmatizer.lemmatize(specific_token, specific_token_pos)
-    return lesk(lemmatized_tokens, lemmatized_specific_token, specific_token)
+
+    return lesk(lemmatized_tokens, lemmatized_specific_token, specific_token_pos)
+
+sentence = "I sat by the river bank watching the fish swim."
+tokens = word_tokenize(sentence)
+synset = lesk_witk_lemmatizer(tokens, "bank", "n")
+print(synset.definition())
